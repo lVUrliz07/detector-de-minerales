@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Upload, Crosshair } from "lucide-react";
+import Image from "next/image";
 
 interface MarsViewerProps {
     onPointSelected: (x: number, y: number, imagePath: string) => void;
@@ -60,10 +61,13 @@ export const MarsViewer = ({ onPointSelected, imageUrl, imagePath, onUpload }: M
                     className="relative w-full h-full cursor-crosshair"
                     onClick={handleClick}
                 >
-                    <img
+                    <Image
                         src={imageUrl}
                         alt="Mars Surface"
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        loading="eager"
+                        unoptimized
                     />
 
                     <AnimatePresence>

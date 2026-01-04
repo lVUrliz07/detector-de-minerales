@@ -9,7 +9,11 @@ import { motion } from "framer-motion";
 export default function Home() {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
   const [imagePath, setImagePath] = useState<string | undefined>();
-  const [analysisData, setAnalysisData] = useState<any | null>(null);
+  const [analysisData, setAnalysisData] = useState<{
+    coordinates: { x: number; y: number };
+    rgb: { r: number; g: number; b: number };
+    analysis: Array<{ name: string; value: number }>;
+  } | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleUpload = async (file: File) => {

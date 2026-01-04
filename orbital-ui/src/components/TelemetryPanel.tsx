@@ -5,7 +5,11 @@ import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianG
 import { motion } from "framer-motion";
 
 interface TelemetryPanelProps {
-    data: any | null;
+    data: {
+        coordinates: { x: number; y: number };
+        rgb: { r: number; g: number; b: number };
+        analysis: Array<{ name: string; value: number }>;
+    } | null;
     loading: boolean;
 }
 
@@ -22,7 +26,7 @@ export const TelemetryPanel = ({ data, loading }: TelemetryPanelProps) => {
     if (!data) {
         return (
             <div className="h-full flex items-center justify-center bg-black/40 backdrop-blur-md rounded-2xl border border-orange-500/10 p-8 text-center text-zinc-500 font-mono text-sm leading-relaxed italic">
-                "Seleccione un punto de interés en el visor para procesar datos espectrales"
+                &quot;Seleccione un punto de interés en el visor para procesar datos espectrales&quot;
             </div>
         );
     }
@@ -78,7 +82,7 @@ export const TelemetryPanel = ({ data, loading }: TelemetryPanelProps) => {
             </div>
 
             <div className="space-y-4">
-                {data.analysis.map((item: any, i: number) => (
+                {data.analysis.map((item: { name: string; value: number }, i: number) => (
                     <div key={i} className="flex items-center justify-between group">
                         <span className="text-xs text-zinc-400 group-hover:text-orange-400 transition-colors uppercase font-mono">{item.name}</span>
                         <div className="flex items-center gap-3 flex-1 px-4">
